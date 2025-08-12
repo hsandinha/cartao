@@ -900,7 +900,7 @@ END:VCARD`;
                 </div>
 
                 {/* Ações do Cartão */}
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-4 justify-center">
                   <Button
                     variant="outline"
                     onClick={shareCard}
