@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
+import { FaWhatsapp } from "react-icons/fa";
 import {
   Mail,
   Phone,
@@ -303,7 +304,8 @@ export default function PublicCardPage() {
                   className="w-full h-11 inline-flex items-center justify-center rounded-2xl ring-1 ring-black/5 hover:ring-2 transition"
                   style={{ backgroundColor: "var(--bg)" }}
                 >
-                  <MessageSquare className="w-4 h-4 mr-2" /> WhatsApp
+                  <FaWhatsapp className="w-5 h-5 mr-2 text-green-500" />{" "}
+                  WhatsApp
                 </a>
               )}
 

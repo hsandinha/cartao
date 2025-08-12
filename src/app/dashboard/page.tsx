@@ -6,7 +6,7 @@ import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "@/lib/firebase";
-
+import { FaWhatsapp } from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -784,7 +784,7 @@ END:VCARD`;
                         }}
                         className="flex items-center justify-center space-x-2 py-2 px-3 bg-white rounded-lg border text-sm hover:bg-gray-50"
                       >
-                        <span className="text-green-600">📱</span>
+                        <FaWhatsapp className="text-green-600 w-5 h-5" />
                         <span>WhatsApp</span>
                       </button>
                       <div className="grid grid-cols-1 gap-4">
