@@ -13,7 +13,6 @@ import {
   Download,
   FileDown,
 } from "lucide-react";
-
 import { QRCodeSVG } from "qrcode.react";
 import { useReactToPrint } from "react-to-print";
 
@@ -46,7 +45,6 @@ const asUrl = (u: string) =>
 
 function toVCard(p: Profile) {
   const addresses = Array.isArray(p.address) ? p.address.filter(Boolean) : [];
-
   return [
     "BEGIN:VCARD",
     "VERSION:3.0",
@@ -129,20 +127,56 @@ export default function PublicCardPage() {
     run();
   }, [uid]);
 
-  // ====== PDF (idêntico ao card) - v3 usa contentRef ======
+  // ====== PDF (igual ao card) ======
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // px -> mm (96 dpi como base comum dos browsers)
+  const pxToMm = (px: number) => (px * 25.4) / 96;
+
+  // CSS dinâmico do @page com base no tamanho real do card
+  const [pageCss, setPageCss] = useState<string>(`
+    @page { margin: 0; }
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      html, body { background: white; margin: 0 !important; padding: 0 !important; }
+      .no-print { display: none !important; }
+      .print-card { box-shadow: none !important; }
+      .print-wrap { margin: 0 !important; padding: 0 !important; width: auto !important; }
+    }
+  `);
+
+  // mede o card sempre que ele existir/mudar e ajusta o @page size
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    // espera um tick para layout estabilizar (fonts/imagens)
+    const id = window.requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect();
+      const wmm = pxToMm(rect.width).toFixed(2);
+      const hmm = pxToMm(rect.height).toFixed(2);
+      setPageCss(`
+        @page { size: ${wmm}mm ${hmm}mm; margin: 0; }
+        @media print {
+          * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+          html, body { background: white; margin: 0 !important; padding: 0 !important; }
+          .no-print { display: none !important; }
+          .print-card { box-shadow: none !important; }
+          .print-wrap { margin: 0 !important; padding: 0 !important; width: auto !important; }
+        }
+      `);
+    });
+
+    return () => window.cancelAnimationFrame(id);
+  }, [profile]);
+
   const handlePrint = useReactToPrint({
     contentRef: cardRef,
     documentTitle: profile ? `Cartão - ${profile.name}` : "Cartão Digital",
     onAfterPrint: () => {
-      console.log("Print completed");
+      // opcional
     },
-    pageStyle: `
-      @page { margin: 0; }
-      @media print {
-        body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      }
-    `,
+    pageStyle: pageCss, // usa CSS calculado para @page size
   });
 
   if (loading) {
@@ -168,19 +202,12 @@ export default function PublicCardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Força impressão de backgrounds/cores */}
-      <style>{`
-        @page { margin: 0; }
-        @media print {
-          * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-          html, body { background: white; }
-        }
-      `}</style>
+    <div className="min-h-screen bg-gray-50 print-wrap">
+      {/* não precisamos de <style> fixo; o useReactToPrint injeta pageStyle */}
 
       <div className="max-w-xl mx-auto p-6 space-y-4">
-        {/* Topo com ações */}
-        <div className="flex items-center justify-between">
+        {/* Topo com ações (some no PDF) */}
+        <div className="flex items-center justify-between no-print">
           <div>
             <h1 className="text-xl font-bold text-gray-900">{profile.name}</h1>
             <p className="text-gray-500 text-sm">{profile.role}</p>
@@ -222,10 +249,10 @@ export default function PublicCardPage() {
               >
           }
         >
-          <div className="mx-auto max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden">
-            {/* HERO com a MESMA imagem de fundo da tela anterior */}
+          <div className="mx-auto max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden print-card">
+            {/* HERO */}
             <div
-              className="px-6 pt-8 pb-12 text-white text-center relative overflow-hidden print-color"
+              className="px-6 pt-8 pb-12 text-white text-center relative overflow-hidden"
               style={{
                 backgroundImage: "url('/fundo.jpg')",
                 backgroundSize: "cover",
@@ -256,7 +283,7 @@ export default function PublicCardPage() {
               </div>
             </div>
 
-            {/* AÇÕES (links como <a> estilizado → ficam clicáveis no PDF) */}
+            {/* AÇÕES */}
             <div className="p-6 grid grid-cols-2 gap-3">
               {profile.phone && (
                 <a
@@ -325,7 +352,6 @@ export default function PublicCardPage() {
               >
                 <div className="p-4">
                   <p className="font-semibold text-gray-900 mb-1">Contato</p>
-
                   <div className="space-y-1 text-sm">
                     <div>
                       {profile.phone && (
@@ -373,7 +399,6 @@ export default function PublicCardPage() {
               >
                 <div className="p-4">
                   <p className="font-semibold text-gray-900 mb-1">Links</p>
-
                   <div className="space-y-2 text-sm">
                     <div>
                       {profile.website && (
@@ -432,7 +457,7 @@ export default function PublicCardPage() {
               </div>
             </div>
 
-            {/* QR + ação secundária */}
+            {/* QR */}
             <div className="px-6 pb-6 flex items-center justify-center">
               {shareUrl && (
                 <QRCodeSVG
