@@ -209,11 +209,7 @@ export default function PublicCardPage() {
 
       <div className="max-w-xl mx-auto p-6 space-y-4">
         {/* Topo com ações (some no PDF) */}
-        <div className="flex items-center justify-between no-print">
-          <div>
-            <h1 className="text-xl font-bold text-gray-900">{profile.name}</h1>
-            <p className="text-gray-500 text-sm">{profile.role}</p>
-          </div>
+        <div className="flex items-center justify-center no-print">
           <div className="flex gap-2">
             <Button
               variant="outline"
