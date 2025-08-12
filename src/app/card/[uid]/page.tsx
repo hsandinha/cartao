@@ -385,46 +385,42 @@ export default function PublicCardPage() {
               >
                 <div className="p-4">
                   <p className="font-semibold text-gray-900 mb-1">Links</p>
-                  <div className="space-y-2 text-sm">
-                    <div>
-                      {profile.website && (
-                        <a
-                          href={asUrl(profile.website)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
-                        >
-                          <Globe className="w-4 h-4" />
-                          Website
-                        </a>
-                      )}
-                    </div>
-                    <div>
-                      {profile.linkedin && (
-                        <a
-                          href={asUrl(profile.linkedin)}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 hover:underline"
-                        >
-                          <Linkedin className="w-3 h-3" />
-                          LinkedIn
-                        </a>
-                      )}
-                    </div>
-                    <div>
-                      {profile.instagram && (
-                        <a
-                          href={asUrl(profile.instagram)}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 hover:underline"
-                        >
-                          <Instagram className="w-3 h-3" />
-                          Instagram
-                        </a>
-                      )}
-                    </div>
+                  <div className="flex gap-3 text-sm">
+                    {profile.website && (
+                      <a
+                        href={asUrl(profile.website)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 hover:underline"
+                      >
+                        <Globe className="w-4 h-4" />
+                        Website
+                      </a>
+                    )}
+
+                    {profile.linkedin && (
+                      <a
+                        href={asUrl(profile.linkedin)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 hover:underline"
+                      >
+                        <Linkedin className="w-3 h-3" />
+                        LinkedIn
+                      </a>
+                    )}
+
+                    {profile.instagram && (
+                      <a
+                        href={asUrl(profile.instagram)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 hover:underline"
+                      >
+                        <Instagram className="w-3 h-3" />
+                        Instagram
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
