@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -30,21 +31,14 @@ export default function LoginPage() {
       {/* Lado visual (inspirado no estilo QuintoAndar: azul forte, clean, cantos arredondados) */}
       <section className="hidden lg:flex flex-col items-center justify-center p-12 bg-blue-600 text-white">
         <div className="max-w-sm space-y-6">
-          <div className="rounded-2xl bg-white/10 backdrop-blur p-4 w-max">
+          <div className="rounded-2xl backdrop-blur p-4 w-max">
             {/* Ícone genérico (não usa marca de terceiros) */}
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2l8 4v6c0 5-3.5 8-8 10C7.5 20 4 17 4 12V6l8-4Z"
-                fill="currentColor"
-                opacity=".9"
-              />
-            </svg>
+            <Image
+              src="/quintoandar.svg"
+              alt="Logo QuintoAndar"
+              width={120}
+              height={120}
+            />
           </div>
           <h1 className="text-3xl font-semibold leading-tight">
             Acesse sua conta

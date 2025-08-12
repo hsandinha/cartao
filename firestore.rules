@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Permite que usuários autenticados leiam e escrevam apenas seus próprios perfis
+    match /profiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Permite teste de conexão (opcional - remover em produção)
+    match /test/{document} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
