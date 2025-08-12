@@ -1,9 +1,13 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Permite acesso completo apenas para usuários autenticados
+    // Aplica a regra para todos os documentos
     match /{document=**} {
-      allow read, write: if request.auth != null;
+      // Qualquer pessoa pode ler (visualizar os cartões)
+      allow read: if true;
+      
+      // Apenas usuários autenticados podem escrever (criar/editar)
+      allow write: if request.auth != null;
     }
   }
 }
