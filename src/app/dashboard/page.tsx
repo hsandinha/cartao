@@ -17,6 +17,8 @@ import {
   Mail,
   Phone,
   Globe,
+  Linkedin,
+  Instagram,
   Download,
   Share2,
   LogOut,
@@ -764,7 +766,7 @@ END:VCARD`;
 
                   {/* Botões de ação */}
                   <div className="px-6 py-4 bg-gray-50">
-                    <div className="grid grid-cols-2 gap-3 mb-4">
+                    <div className="grid grid-cols-3 gap-3 mb-4">
                       <button
                         onClick={() => {
                           const f = onlyDigits(profile.phone);
@@ -785,28 +787,18 @@ END:VCARD`;
                         <span className="text-green-600">📱</span>
                         <span>WhatsApp</span>
                       </button>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button
-                        onClick={() =>
-                          profile.email &&
-                          window.open(`mailto:${profile.email}`)
-                        }
-                        className="flex items-center justify-center space-x-2 py-2 px-3 bg-white rounded-lg border text-sm hover:bg-gray-50"
-                      >
-                        <Mail className="w-4 h-4" />
-                        <span>E-mail</span>
-                      </button>
-                      <button
-                        onClick={() =>
-                          profile.website &&
-                          window.open(asUrl(profile.website), "_blank")
-                        }
-                        className="flex items-center justify-center space-x-2 py-2 px-3 bg-white rounded-lg border text-sm hover:bg-gray-50"
-                      >
-                        <Globe className="w-4 h-4" />
-                        <span>Site</span>
-                      </button>
+                      <div className="grid grid-cols-1 gap-4">
+                        <button
+                          onClick={() =>
+                            profile.email &&
+                            window.open(`mailto:${profile.email}`)
+                          }
+                          className="flex items-center justify-center space-x-2 py-2 px-3 bg-white rounded-lg border text-sm hover:bg-gray-50"
+                        >
+                          <Mail className="w-4 h-4" />
+                          <span>E-mail</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -869,7 +861,7 @@ END:VCARD`;
                               target="_blank"
                               className="flex items-center space-x-2 text-blue-600 hover:underline"
                             >
-                              <Globe className="w-4 h-4 text-gray-400" />
+                              <Linkedin className="w-4 h-4 text-gray-400" />
                               <span className="truncate">LinkedIn</span>
                             </a>
                           )}
@@ -879,7 +871,7 @@ END:VCARD`;
                               target="_blank"
                               className="flex items-center space-x-2 text-blue-600 hover:underline"
                             >
-                              <Globe className="w-4 h-4 text-gray-400" />
+                              <Instagram className="w-4 h-4 text-gray-400" />
                               <span className="truncate">Instagram</span>
                             </a>
                           )}

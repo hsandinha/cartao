@@ -8,6 +8,8 @@ import {
   Mail,
   Phone,
   Globe,
+  Linkedin,
+  Instagram,
   MapPin,
   MessageSquare,
   Download,
@@ -284,7 +286,7 @@ export default function PublicCardPage() {
             </div>
 
             {/* AÇÕES */}
-            <div className="p-6 grid grid-cols-2 gap-3">
+            <div className="p-6 grid grid-cols-3 gap-3">
               {profile.phone && (
                 <a
                   href={`tel:${onlyDigits(profile.phone)}`}
@@ -316,18 +318,6 @@ export default function PublicCardPage() {
                   style={{ backgroundColor: "var(--bg)" }}
                 >
                   <Mail className="w-4 h-4 mr-2" /> E-mail
-                </a>
-              )}
-
-              {profile.website && (
-                <a
-                  href={asUrl(profile.website)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full h-11 inline-flex items-center justify-center rounded-2xl ring-1 ring-black/5 hover:ring-2 transition"
-                  style={{ backgroundColor: "var(--bg)" }}
-                >
-                  <Globe className="w-4 h-4 mr-2" /> Site
                 </a>
               )}
             </div>
@@ -421,7 +411,7 @@ export default function PublicCardPage() {
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 hover:underline"
                         >
-                          <Globe className="w-3 h-3" />
+                          <Linkedin className="w-3 h-3" />
                           LinkedIn
                         </a>
                       )}
@@ -434,21 +424,8 @@ export default function PublicCardPage() {
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 hover:underline"
                         >
-                          <Globe className="w-3 h-3" />
+                          <Instagram className="w-3 h-3" />
                           Instagram
-                        </a>
-                      )}
-                    </div>
-                    <div>
-                      {profile.phone && (
-                        <a
-                          href={`https://wa.me/${onlyDigits(profile.phone)}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 hover:underline"
-                        >
-                          <MessageSquare className="w-3 h-3" />
-                          WhatsApp
                         </a>
                       )}
                     </div>
