@@ -4,7 +4,6 @@ import { useParams } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
-import { FaWhatsapp } from "react-icons/fa";
 import {
   Mail,
   Phone,
@@ -17,6 +16,7 @@ import {
   FileDown,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useReactToPrint } from "react-to-print";
 
 const BRAND = {
@@ -254,8 +254,8 @@ export default function PublicCardPage() {
               className="px-6 pt-8 pb-12 text-white text-center relative overflow-hidden"
               style={{
                 backgroundImage: "url('/fundo.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundSize: "102% 107%",
+                backgroundPosition: "absolute",
               }}
             >
               <div

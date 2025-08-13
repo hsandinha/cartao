@@ -615,7 +615,7 @@ END:VCARD`;
               <CardContent>
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                   {/* Header com fundo + avatar + botões */}
-                  <div className="relative px-6 pt-8 pb-10 text-center text-white bg-[url('/fundo.jpg')] bg-cover bg-center">
+                  <div className="relative px-6 pt-8 pb-10 text-center text-white bg-[url('/fundo.jpg')] bg-[length:105%_115%] bg-no-repeat bg-current">
                     <div className="absolute inset-0 bg-black/30" />
                     <div className="relative flex flex-col items-center">
                       <div className="relative w-20 h-20 rounded-full ring-4 ring-white overflow-hidden bg-white shadow mb-3">
