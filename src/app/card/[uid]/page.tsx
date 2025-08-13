@@ -248,7 +248,7 @@ export default function PublicCardPage() {
               >
           }
         >
-          <div className="mx-auto max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden print-card">
+          <div className="mx-auto max-w-sm  rounded-3xl shadow-2xl overflow-hidden print-card">
             {/* HERO */}
             <div
               className="px-6 pt-8 pb-12 text-white text-center relative overflow-hidden"
